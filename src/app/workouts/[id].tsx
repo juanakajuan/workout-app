@@ -134,7 +134,7 @@ function Editor({ initial, exercises: catalog, isNew }: EditorProps) {
           onChangeText={(name) => dispatch({ type: 'rename', name })}
           placeholder="Workout name"
           placeholderTextColor={theme.textSecondary}
-          style={[styles.input, styles.nameInput, inputColors(theme)]}
+          style={[styles.input, inputColors(theme)]}
         />
 
         {draft.exercises.map((exercise, exerciseIndex) => (
@@ -232,7 +232,7 @@ function Editor({ initial, exercises: catalog, isNew }: EditorProps) {
 }
 
 function inputColors(theme: ReturnType<typeof useTheme>) {
-  return { color: theme.text, backgroundColor: theme.backgroundElement };
+  return { color: theme.text, backgroundColor: theme.backgroundSelected };
 }
 
 type SetInputProps = {
@@ -277,7 +277,7 @@ function ExercisePicker({ visible, catalog, onClose, onPick }: PickerProps) {
 
   return (
     <Modal visible={visible} animationType="slide" onRequestClose={onClose} onShow={() => setQuery('')}>
-      <Screen>
+      <Screen style={styles.picker}>
         <View style={styles.cardHeader}>
           <ThemedText type="subtitle" style={styles.flex}>
             Add exercise
@@ -290,7 +290,7 @@ function ExercisePicker({ visible, catalog, onClose, onPick }: PickerProps) {
           placeholder="Search exercises"
           placeholderTextColor={theme.textSecondary}
           autoCorrect={false}
-          style={[styles.input, styles.nameInput, inputColors(theme)]}
+          style={[styles.input, inputColors(theme)]}
         />
         <FlatList
           data={matches}
@@ -315,6 +315,7 @@ function ExercisePicker({ visible, catalog, onClose, onPick }: PickerProps) {
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
+  picker: { gap: Spacing.three },
   scroll: { gap: Spacing.three, paddingBottom: Spacing.six },
   rowStart: { flexDirection: 'row', justifyContent: 'flex-start' },
   input: {
@@ -323,7 +324,6 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.two,
     fontSize: 16,
   },
-  nameInput: { marginBottom: Spacing.one },
   card: { borderRadius: Spacing.three, padding: Spacing.three, gap: Spacing.two },
   cardHeader: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two, flexWrap: 'wrap' },
   setRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },

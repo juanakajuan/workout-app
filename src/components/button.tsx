@@ -22,7 +22,7 @@ export function Button({ label, onPress, variant = 'secondary', disabled = false
       onPress={onPress}
       style={({ pressed }) => (pressed || disabled) && styles.dimmed}>
       <ThemedView
-        type={variant === 'primary' ? 'text' : 'backgroundElement'}
+        type={variant === 'primary' ? 'text' : 'backgroundSelected'}
         style={styles.button}>
         <ThemedText
           type="smallBold"
